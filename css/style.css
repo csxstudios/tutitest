@@ -1,0 +1,206 @@
+/* Empty. Add your own CSS if you like */
+.star > .item-content {background-color:MintCream!important;}
+.tabs-top .bar-subheader {top:93px;}
+.menu-left {background-color:#424040;}
+.menu-left a{text-decoration:none;color:initial;color:#fff;}
+img.title-logo {display:inline-block;height:100%;width:auto;}
+.menu-left .icon {margin-right:10px;opacity:.8;font-size:120%;}
+.menu-left .item {border-color: #5a5959;background-color: #424040;color: #fff;}
+html,body        {height:100%;}
+.home-screen .tile {height:28vh;min-height:100px;position:relative;background-size:cover;}
+.home-screen a {display:block;height:100%;width:100%;}
+.bg-watch {background:url(../img/watch-live-tv.jpg) center center no-repeat;}
+.bg-events {background:url(../img/events.jpg) center center no-repeat;}
+.bg-videos {background:url(../img/on-demand-videos.jpg) center center no-repeat;}
+.bg-black, #video .item, #video .item h2 {background-color:#000; color:#fff;}
+#video {background:url(../img/loading.gif) center center no-repeat #000;}
+#video .item {border-color:#000;}
+#videos .item-complex .item-content, #video .item, #events .item, #events .item-complex .item-content, .side-list .item {padding:0;}
+.side-list a{display:block;padding:16px;}
+#videos .item-complex .item-content .delay {position:relative;}
+#videos .item-complex .item-content .delay h2 {position:absolute;padding:16px;bottom:0;left:0;color:#fff;width:100%;background:linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,.3) 50%,rgba(0,0,0,0.8) 100%);}
+#preloader {
+width: 100%;
+height: 100vh;
+position: fixed;
+top: 0;
+left: 0;
+z-index: 5000;
+background-color: #000;
+}
+#preloader .logo-animated {
+height: 100px;
+width: 200px;
+position: absolute;
+top: 50%;
+left: 50%;
+-webkit-transform: translate(-50%,-40%);
+-o-transform: translate(-50%,-40%);
+transform: translate(-50%,-40%);
+background: url(../img/tuti-logo.png) center center no-repeat;
+}
+.wrapper         {width:80%;height:100%;margin:0 auto;background:#000}
+.h_iframe        {position:relative;}
+.h_iframe .ratio {display:block;width:100%;height:auto;}
+.h_iframe iframe {position:absolute;top:0;left:0;width:100%; height:100%;}
+.branding {margin:20px 0;}
+.bar.bar-positive .title {
+    background: url(../img/tuti-title-logo.png) center center no-repeat;
+    text-indent: -99999px;
+}
+.button.button-positive, .bar-positive .button{background-color:#6cb300;}
+.tabs.tabs-positive, .bar.bar-positive{background-color:#8cbf3f!important;border-color:#8cbf3f!important;background-image:url(../img/pattern.png)!important;}
+.tabs-striped.tabs-positive .tabs, .tab-nav.tabs {background-color: #808080!important;}
+.tabs-striped .tabs{border-bottom: 0px solid #808080;}
+.tabs-striped.tabs-positive .tab-item {color: rgba(255, 255, 255, 0.75);}
+.tabs-striped.tabs-positive .tab-item.tab-item-active, .tabs-striped.tabs-positive .tab-item.active, .tabs-striped.tabs-positive .tab-item.activated {border-color: #6cb300;border-width: 0px 0px 5px 0px !important;margin-top:0;}
+.embed-responsive {position:relative;display:block;height:0;padding:0;overflow:hidden;}
+.embed-responsive.embed-responsive-16by9 {padding-bottom:56.25%;background:url(../img/loading.gif) center center no-repeat #383a35;}
+.embed-responsive-item {position:absolute;top:0;bottom:0;width:100%;height:100%;}
+.item-complex.item-text-wrap h1 {margin-top:0;}
+.video-details img {height:80px;width:80px;display:inline-block;}
+.video-details h2 {padding-left:15px;display:inline-block;vertical-align:top;}
+.img-responsive {display: block;max-width: 100%;height: auto;}
+.poster {margin-bottom:15px;}
+div.ng-binding p {margin: 0 0 10.5px;}
+div.ng-binding {
+font-family: 'Titillium Web', sans-serif;
+font-weight: 300;
+color: #5b6374;
+font-size: 17px;
+line-height: 1.4;
+}
+.btn {
+font-size: 20px;
+padding: 14px 18px;
+line-height: 20px;
+}
+.btn-default {
+color: #333;
+background-color: #e7e7e7;
+border-color: #ccc;
+}
+.btn {
+display: inline-block;
+margin-bottom: 0;
+font-weight: normal;
+text-align: center;
+vertical-align: middle;
+touch-action: manipulation;
+cursor: pointer;
+background-image: none;
+border: 1px solid transparent;
+white-space: nowrap;
+line-height: 1.4;
+border-radius: 0;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+}
+.arve-wrapper {
+	margin-bottom: 20px;
+	width: 100%;
+	/* Background image is applied with inline CSS */
+	background-position: center center;
+	background-size: cover;
+	position: relative;
+	behavior: url(backgroundsize.min.htc); /* IE polyfill for background size */
+}
+
+.activity-box {
+    display: block;
+    position: fixed; /* fixed position so it doesn't scroll */
+    z-index: 9999; /* on top of everything else */
+    width: 250px;
+    margin-left: -125px; /* horizontally centered */
+    left: 50%;
+    top: 10px; /* displayed on the top of the page, just like Gmail's yellow info-box */
+    height: 40px;
+    padding: 10px;
+    background-color: #f3e9b5;
+    border-radius: 4px;
+}
+
+/* styles for the activity text */
+.activity-box span {
+    display: block;
+    position: relative;
+    margin-left: 60px;
+    margin-top: 10px;
+    font-family: arial;
+    font-size: 15px;
+}
+
+/* animating a static image */
+.activity-box img {
+    display: block;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    /* Below is the key for the rotating animation */
+    -webkit-animation: spin 1s infinite linear;
+    -moz-animation: spin 1s infinite linear;
+    -o-animation: spin 1s infinite linear;
+    animation: spin 1s infinite linear;
+}
+
+/* keyframe animation defined for various browsers */
+@-moz-keyframes spin {
+    0% { -moz-transform: rotate(0deg); }
+    100% { -moz-transform: rotate(359deg); }
+}
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(359deg); }
+}
+@-o-keyframes spin {
+    0% { -o-transform: rotate(0deg); }
+    100% { -o-transform: rotate(359deg); }
+}
+@-ms-keyframes spin {
+    0% { -ms-transform: rotate(0deg); }
+    100% { -ms-transform: rotate(359deg); }
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(359deg); }
+}
+
+.arve-wrapper.alignright {
+	margin-left: 20px;
+}
+
+.arve-wrapper.alignleft {
+	margin-right: 20px;
+}
+
+.arve-embed-container {
+	position: relative;
+	display: block;
+	height: 0;
+	padding: 0 0 56.25%; /* 16/9 ratio */
+	overflow: hidden;
+}
+
+.arve-inner {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	height: 100%;
+	width: 100%;
+	border: 0;
+	overflow: hidden !important;
+}
+
+.arve-promote-link {
+	position: absolute;
+	right: 0;
+	bottom: -10px;
+	font-family: "Open Sans", "Sagoe UI", Arial, sans-serif;
+	font-size: 9px;
+	line-height: 1;
+}
+
+.arve-hidden {display: none;}

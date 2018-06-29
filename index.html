@@ -1,0 +1,221 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Access-Control-Allow-Origin" content="http://tuti.tv/*">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>TutiTV - Music Lives Here</title>
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <script src="js/platformOverrides.js"></script>
+    
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <!-- your app's js -->
+    <script src="js/angular-youtube-embed.min.js"></script>
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <script src="js/wow.min.js"></script>
+    <script src="js/loadmore.js"></script>
+    <script src="js/app.js"></script>
+
+  </head>
+<body ng-app="tuti" ng-controller="mycontroller">
+    
+    <div id="preloader">
+        <div class="logo-animated"></div>
+    </div>
+    <ion-side-menus>
+    <!-- Left menu -->
+    <ion-side-menu side="left">
+        <div class="side-header"><img src="img/tuti-side-menu-banner.jpg" class="img-responsive" /></div>
+        <ion-list class="side-list">
+            <ion-item><a ng-click="toggleLeftSideMenu()" nav-direction="backward" href="#/tab/home"><ion-icon class="icon ion-home"></ion-icon> HOME</a></ion-item>
+            <ion-item><a ng-click="toggleLeftSideMenu()" nav-direction="backward" href="#/tab/watch"><ion-icon class="icon ion-ios-monitor"></ion-icon> WATCH LIVE TV</a></ion-item>
+            <ion-item><a ng-click="toggleLeftSideMenu()" nav-direction="backward" href="#/tab/lists"><ion-icon class="icon ion-android-film"></ion-icon> ON-DEMAND</a></ion-item>
+            <ion-item><a ng-click="toggleLeftSideMenu()" nav-direction="backward" href="#/tab/events"><ion-icon class="icon ion-android-list"></ion-icon> EVENTS</a></ion-item>
+        </ion-list>
+    </ion-side-menu>
+
+    <ion-side-menu-content>
+        <ion-nav-bar class="bar-positive" align-title="center">
+            <ion-nav-buttons side="left">
+                <button ng-click="toggleLeftSideMenu()" menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+            </ion-nav-buttons>
+            <ion-nav-back-button></ion-nav-back-button>
+        </ion-nav-bar>
+        <ion-nav-view></ion-nav-view>
+    </ion-side-menu-content>
+
+    </ion-side-menus>
+
+   
+
+    <script id="templates/tabs.html" type="text/ng-template">
+        <ion-tabs class="tabs-positive">
+
+            <ion-tab title="HOME" href="#/tab/home" nav-direction="forward">
+                <ion-nav-view name="home-tab"></ion-nav-view>
+            </ion-tab>
+            
+            <ion-tab title="WATCH LIVE" ui-sref="tabs.watch" nav-direction="forward">
+                <ion-nav-view name="watch-tab"></ion-nav-view>
+            </ion-tab>
+
+            <ion-tab title="ON-DEMAND" href="#/tab/lists" nav-direction="forward">
+                <ion-nav-view name="lists-tab"></ion-nav-view>
+            </ion-tab>
+
+            <ion-tab title="EVENTS" href="#/tab/events" nav-direction="forward">
+                <ion-nav-view name="events-tab"></ion-nav-view>
+            </ion-tab>                        
+
+        </ion-tabs>
+    </script>
+
+    <script id="templates/home.html" type="text/ng-template">
+        <ion-view view-title="HOME" hide-nav-bar="false" data-ng-init="">
+            <ion-content class="bg-black home-screen">
+                <div class="wow fadeInUp bg-watch tile">
+                    <a nav-transition="android" nav-direction="forward" href="#/tab/watch"></a>
+                </div>                
+                <div class="wow fadeInUp bg-events tile" data-wow-delay=".5s">
+                    <a nav-transition="android" nav-direction="forward" href="#/tab/events"></a>
+                </div>
+                <div class="wow fadeInUp bg-videos tile" data-wow-delay="1s">
+                    <a nav-transition="android" nav-direction="forward" href="#/tab/lists"></a>
+                </div>
+            </ion-content>
+        </ion-view>
+    </script>
+
+    <script id="templates/events.html" type="text/ng-template">
+        <ion-view view-title="EVENTS" data-ng-init="">
+            <ion-pane>
+                <ion-header-bar class="bar-subheader item-input-inset bar-light wow fadeInLeft">
+                    <label class="item-input-wrapper">
+                        <i class="icon ion-search placeholder-icon"></i>
+                        <input type="search" ng-model="query" placeholder="Search" />
+                    </label>
+                </ion-header-bar>
+                <ion-content class="has-header has-subheader wow fadeInUp" id="events" data-wow-delay=".5s">
+                    <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+                    <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
+                        <ion-item ng-repeat="item in events | filter: query" class="item-text-wrap" href="#/tab/events/{{item.id}}">
+                            <img ng-src="{{item.better_featured_image.source_url}}" alt="{{item.title.rendered}} Poster" class="img-responsive" />
+                        </ion-item>
+                    </ion-list>
+                </ion-content>
+            </ion-pane>
+        </ion-view>
+    </script>
+
+    <script id="templates/event.html" type="text/ng-template">
+        <ion-view view-title="EVENT DETAILS">
+            <ion-pane>
+                <ion-content class="has-header wow fadeInUp" id="event" data-wow-delay=".5s">
+                    <ion-list>
+                        <ion-item ng-repeat="item in events | filter: {id : whichartist} track by item.id | limitTo:1" class="item-text-wrap cards">
+                            <img ng-src="{{item.better_featured_image.source_url}}" alt="{{item.title.rendered}} Poster" class="img-responsive poster" />
+                            <h2>{{item.title.rendered}}</h2>
+                            <div ng-bind-html="item.content.rendered | to_trusted"></div>
+                        </ion-item>
+                    </ion-list>
+                </ion-content>
+            </ion-pane>
+        </ion-view>
+    </script>
+
+    <script id="templates/lists.html" type="text/ng-template">
+        <ion-view view-title="ON-DEMAND VIDEO" data-ng-init="">
+            <ion-pane>
+                <ion-header-bar class="bar-subheader item-input-inset bar-light wow fadeInLeft">
+                    <label class="item-input-wrapper">
+                        <i class="icon ion-search placeholder-icon"></i>
+                        <input type="search" ng-model="query" placeholder="Search" />
+                    </label>
+                </ion-header-bar>
+                <ion-content id="videos" class="has-header has-subheader wow fadeInUp" data-wow-delay=".5s">
+                    <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+                    <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
+                        <ion-item ng-class="{'star' : item.star}" ng-repeat="item in artists | filter: query" class="item-text-wrap" href="#/tab/lists/{{item.id}}">
+                            <div class="delay">
+                                <img ng-src="{{item.better_featured_image.source_url}}" alt="{{item['wpcf-video-artist']}} Photo" class="img-responsive"/>
+                                <h2><strong>{{item['wpcf-video-artist']}}</strong><br />{{item['wpcf-video-song-title']}}</h2>
+                            </div>
+                        </ion-item>
+                    </ion-list>
+                </ion-content>
+            </ion-pane>
+        </ion-view>
+    </script>
+
+    <script id="templates/details.html" type="text/ng-template">
+        <ion-view view-title="MUSIC VIDEO">
+            <ion-pane>
+                <ion-content class="bg-black" id="video">
+                    <ion-list>
+                        <ion-item ng-repeat="item in artists | filter: {id : whichartist} track by item.id | limitTo:1" class="wow fadeInUp" data-wow-delay=".5s">
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe class="embed-responsive-item" src="{{trustSrc(item['wpcf-embed-video-url'] + '?autoplay=1')}}" frameborder="0" allowfullscreen></iframe>
+                                <!-- <button class="button icon ion-home" ng-click="changeOrientationLandscape()">Landscape</button> -->
+                            </div>
+                            <div class="video-details padding">
+                                <img ng-src="{{item.better_featured_image.media_details.sizes.thumbnail.source_url}}" alt="{{item['wpcf-video-artist']}} Photo" />
+                                <h2><strong>{{item['wpcf-video-artist']}}</strong><br />{{item['wpcf-video-song-title']}}</h2>
+                            </div>
+                            <div ng-bind-html="item.content.rendered | to_trusted"></div>
+                        </ion-item>
+                    </ion-list>
+                </ion-content>
+            </ion-pane>
+        </ion-view>
+    </script>
+
+    <script id="templates/watch.html" type="text/ng-template">
+        <ion-view title="WATCH LIVE TV" hide-nav-bar="true" data-ng-init="" hide-tabs="true">
+            <ion-content class="bg-black has-header has-subheader">
+                <div class="wrapper wow fadeInUp">
+                    <div class="h_iframe">
+                        <!-- a transparent image is preferable -->
+                        <img class="ratio" src="http://placehold.it/16x9" />
+                        <iframe class="livestream" src="http://admin.livestreamingcdn.com/iframe/plans.php?s=myStream.sdp&c=livecdn827" frameborder="0" allowfullscreen></iframe>
+                        <!-- <button class="button icon ion-home" ng-click="changeOrientationLandscape()">Landscape</button> -->
+                    </div>
+                </div>
+            </ion-content>
+        </ion-view>
+    </script>
+    <script id="settings.html" type="text/ng-template">
+        <ion-modal-view>
+            <ion-header-bar class="bar bar-header bar-positive">
+                <h1 class="title">Settings</h1>
+                <button class="button button-clear button-primary ion-close" ng-click="modal.hide()"></button>
+            </ion-header-bar>
+            <ion-content class="padding">
+                <ul class="list">
+                    <li class="item item-toggle">
+                        HTML5
+                        <div class="toggle toggle-positive">
+                            <input type="checkbox"><!-- ng-model="" ng-click=""-->
+                            <div class="track">
+                                <div class="handle"></div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </ion-content>
+        </ion-modal-view>
+    </script>
+</body>
+</html>
